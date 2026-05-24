@@ -17,9 +17,9 @@
 | **MODE-B 归纳总结** | "总结""归纳""帮我看看这篇讲了什么" | 结构化中文摘要(贡献+方法+实验+局限+点评) |
 | **MODE-C 完整叙述** | "做成研究背景章节""不要只给论点,我要完整叙述" | 多篇文献融合的完整段落长文,可直接用作论文章节 |
 
-**三种模式绝不能混淆**。这是本 Skill 第一原则——它是从一次 V1→V4 反复返工的失败案例中提炼出来的(见 [`references/pitfalls.md`](references/pitfalls.md))。
+**三种模式绝不能混淆**。这是本 Skill 第一原则——它源自多次"模式被偷偷混淆导致反复返工"的失败案例,详见 [`references/pitfalls.md`](references/pitfalls.md)。
 
-此外,本 Skill 还内置了对中文学术 markdown 章节标题多种命名风格(`## 3.` / `## 三、` / `## 研究背景与动机` / `## 背景与动机`)的**容错抽取**——历史上仅依赖数字编号匹配,会漏掉 1/3 以上的文献。
+此外,本 Skill 还内置了对中文学术 markdown 章节标题多种命名风格(`## 3.` / `## 三、` / `## 研究背景与动机` / `## 背景与动机`)的**容错抽取**——历史经验表明,仅依赖数字编号匹配会漏掉相当比例的文献。
 
 ---
 
@@ -66,7 +66,7 @@ ln -s "$(pwd)/claude-literature-deep-skill" ~/.claude/skills/literature-deep-ski
 在 Claude Code 中,直接用自然语言触发即可。Skill 会在动手前用 `AskUserQuestion` 与你确认模式:
 
 ```
-> 帮我处理 /papers/ 下的 18 篇文献,做成第三次组会的研究背景汇报
+> 帮我处理 /papers/ 下的若干篇文献,做成研究背景汇报
 ```
 
 Claude 会问你:
@@ -130,15 +130,15 @@ EOF
 from build_pptx import AcademicDeck
 
 deck = AcademicDeck()
-deck.add_cover(title="研究汇报", subtitle="第三次组会",
+deck.add_cover(title="研究汇报", subtitle="组会报告",
                author="张三", date="2026-05")
 deck.add_toc(["研究背景", "相关工作", "方法", "实验"])
-deck.add_section_header("01", "研究背景", "时间/语义/评测三重张力")
+deck.add_section_header("01", "研究背景", "问题定义与现状")
 deck.add_content_slide(
-    title="NHTSA 2021: 美国 3522 例分心致死",
+    title="行动式标题示例:核心论点放在标题里",
     bullets=[
-        ("分心驾驶死亡占比 8% [#2]", None),
-        ("视线离路 ≥2s 即显著增加碰撞风险 [#4]", "Klauer et al., 2006"),
+        ("第一个论据,带数据 [#1]", None),
+        ("第二个论据,带次级注释 [#2]", "次级注释用更小字号、灰色"),
     ],
 )
 deck.save("output.pptx")
@@ -164,7 +164,7 @@ python3 scripts/build_pptx.py /tmp/demo.pptx
 
 ### MODE-C 完整叙述
 
-每节由 2~5 个完整段落组成,而非 bullet list。数据嵌入文中(「NHTSA 2021 年报告显示美国当年因分心驾驶造成 3522 人死亡[#1]」),而非「• 美国 3522 例 [#1]」。学术语气,克制,避免营销话术。
+每节由 2~5 个完整段落组成,而非 bullet list。数据嵌入文中(如「某权威机构 X 年报告显示某地区当年发生 N 起事故[#1]」),而非「• N 例 [#1]」。学术语气,克制,避免营销话术。
 
 详见 [`references/extraction-modes.md`](references/extraction-modes.md)。
 
@@ -195,6 +195,6 @@ python3 scripts/build_pptx.py /tmp/demo.pptx
 
 ## 🙏 致谢
 
-本 Skill 的设计来自一次真实的「18 篇 VLM × DMS 文献综述 → 组会汇报」工作流,通过四轮反复返工才稳定下来。**所有踩坑都被忠实记录在 [`references/pitfalls.md`](references/pitfalls.md) 中,这是它最值钱的部分**。
+本 Skill 的设计源自真实学术综述工作流中**多次反复返工**的经验沉淀——所有踩坑都被忠实记录在 [`references/pitfalls.md`](references/pitfalls.md) 中,这是它**最值钱的部分**。
 
-如果它对你的学术工作有帮助,欢迎 star ⭐。
+如果它对你的学术工作有帮助,欢迎 star ⭐。也欢迎提 PR 把你自己遇到的失败案例追加到 pitfalls 里。

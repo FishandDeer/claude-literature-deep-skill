@@ -12,27 +12,27 @@ build_pptx.py — 学术风 python-pptx 模板封装
     from build_pptx import AcademicDeck
 
     deck = AcademicDeck()
-    deck.add_cover(title="自动驾驶接管状态监测",
-                   subtitle="第三次组会汇报",
+    deck.add_cover(title="研究汇报",
+                   subtitle="组会报告",
                    author="张三", date="2026-05",
                    org="某某实验室")
     deck.add_toc(["研究背景", "相关工作", "研究问题", "下一步计划"])
     deck.add_section_header(number="01", name="研究背景",
-                            tagline="时间 / 语义 / 评测三重张力")
+                            tagline="问题定义 / 现状 / 切入角度")
     deck.add_content_slide(
-        title="NHTSA 2021: 美国 3522 例分心致死",
+        title="行动式标题示例:核心论点放在标题里",
         bullets=[
-            ("分心驾驶死亡占比 8% [#2]", None),
-            ("事故占比 14%, 受伤占比 13% [#2]", None),
-            ("Klauer 2006: 视线离路 ≥2s 即显著增加碰撞风险 [#4]", None),
+            ("第一个论据,带数据 [#1]", None),
+            ("第二个论据,带次级注释 [#2]", "次级注释用更小字号"),
+            ("第三个论据 [#3]", None),
         ],
     )
     deck.add_compare_slide(
-        title="监督学习 vs VLM 三范式",
+        title="方法 A vs 方法 B vs 方法 C 的优劣",
         columns=[
-            ("监督学习", ["CNN/ViT 高精度", "依赖大规模标注", "长尾性能下降"]),
-            ("VLM 零样本", ["无需训练", "语义灵活", "推理慢"]),
-            ("VLM 微调", ["折中方案", "样本效率高", "需 prompt 工程"]),
+            ("方法 A", ["优点 1", "优点 2", "局限 1"]),
+            ("方法 B", ["优点 1", "优点 2", "局限 1"]),
+            ("方法 C", ["优点 1", "优点 2", "局限 1"]),
         ],
     )
     deck.save("/path/to/output.pptx")
@@ -368,19 +368,19 @@ if __name__ == "__main__":
     d.add_cover("学术 PPT 模板自检", "literature-deep-skill",
                 author="自检", date="2026-05", org="本地测试")
     d.add_toc(["研究背景", "相关工作", "方法", "实验", "结论"])
-    d.add_section_header("01", "研究背景", "时间 / 语义 / 评测三重张力")
-    d.add_content_slide("NHTSA 2021: 美国 3522 例分心致死",
-        [("分心驾驶死亡占比 8% [#2]", None),
-         ("事故占比 14%, 受伤占比 13%", "数据来源: NHTSA Traffic Safety Facts 2021"),
-         ("视线离路 ≥2s 即显著增加碰撞风险 [#4]", "Klauer et al., 2006")])
-    d.add_compare_slide("监督学习 vs VLM 三范式",
-        [("监督学习", ["CNN/ViT 高精度", "依赖大规模标注", "长尾性能下降"]),
-         ("VLM 零样本", ["无需训练", "语义灵活", "推理慢"]),
-         ("VLM 微调", ["折中方案", "样本效率高", "需 prompt 工程"])])
+    d.add_section_header("01", "研究背景", "问题定义与现状")
+    d.add_content_slide("行动式标题示例:核心论点放在标题里",
+        [("第一个论据,带数据 [#1]", None),
+         ("第二个论据,带次级注释 [#2]", "次级注释用更小字号、灰色"),
+         ("第三个论据 [#3]", None)])
+    d.add_compare_slide("方法 A vs 方法 B vs 方法 C",
+        [("方法 A", ["优点 1", "优点 2", "局限 1"]),
+         ("方法 B", ["优点 1", "优点 2", "局限 1"]),
+         ("方法 C", ["优点 1", "优点 2", "局限 1"])])
     d.add_references_slide([
-        "Klauer S G, et al. The impact of driver inattention on near-crash/crash risk. NHTSA Report, 2006.",
-        "NHTSA. Traffic Safety Facts 2021: Distracted Driving. 2023.",
+        "First Author, et al. Paper Title. Conference/Journal, Year.",
+        "Second Author, et al. Another Paper Title. Conference/Journal, Year.",
     ])
-    d.add_ending("Q & A", "lab@example.edu")
+    d.add_ending("Q & A", "your-email@example.edu")
     p = d.save(out)
     print(f"Demo PPT saved: {p}")
